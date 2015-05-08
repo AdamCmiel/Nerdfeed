@@ -15,7 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // create instance of courses vc
+        var zvc = ZENCoursesViewController()
+        
+        // create a navigation controller to root the screen and add the zvc to the nc
+        var nc = UINavigationController(rootViewController: zvc)
+        var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window.rootViewController = nc
+        
+        // boilerplate
         return true
     }
 

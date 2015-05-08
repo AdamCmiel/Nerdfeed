@@ -13,6 +13,8 @@
 		7726B1001AFC253A0024A10E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7726B0FF1AFC253A0024A10E /* Images.xcassets */; };
 		7726B1031AFC253A0024A10E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7726B1011AFC253A0024A10E /* LaunchScreen.xib */; };
 		7726B10F1AFC253A0024A10E /* NerdfeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726B10E1AFC253A0024A10E /* NerdfeedTests.swift */; };
+		77F3E79D1AFC26A300572FD1 /* ZENCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3E79B1AFC26A300572FD1 /* ZENCoursesViewController.swift */; };
+		77F3E79E1AFC26A300572FD1 /* ZENCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F3E79C1AFC26A300572FD1 /* ZENCoursesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		7726B1081AFC253A0024A10E /* NerdfeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NerdfeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7726B10D1AFC253A0024A10E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7726B10E1AFC253A0024A10E /* NerdfeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerdfeedTests.swift; sourceTree = "<group>"; };
+		77F3E79B1AFC26A300572FD1 /* ZENCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZENCoursesViewController.swift; sourceTree = "<group>"; };
+		77F3E79C1AFC26A300572FD1 /* ZENCoursesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZENCoursesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 		7726B0F51AFC253A0024A10E /* Nerdfeed */ = {
 			isa = PBXGroup;
 			children = (
+				77F3E79B1AFC26A300572FD1 /* ZENCoursesViewController.swift */,
+				77F3E79C1AFC26A300572FD1 /* ZENCoursesViewController.xib */,
 				7726B0F81AFC253A0024A10E /* AppDelegate.swift */,
 				7726B0FA1AFC253A0024A10E /* ViewController.swift */,
 				7726B0FC1AFC253A0024A10E /* Main.storyboard */,
@@ -193,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7726B0FE1AFC253A0024A10E /* Main.storyboard in Resources */,
+				77F3E79E1AFC26A300572FD1 /* ZENCoursesViewController.xib in Resources */,
 				7726B1031AFC253A0024A10E /* LaunchScreen.xib in Resources */,
 				7726B1001AFC253A0024A10E /* Images.xcassets in Resources */,
 			);
@@ -212,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F3E79D1AFC26A300572FD1 /* ZENCoursesViewController.swift in Sources */,
 				7726B0FB1AFC253A0024A10E /* ViewController.swift in Sources */,
 				7726B0F91AFC253A0024A10E /* AppDelegate.swift in Sources */,
 			);
@@ -411,6 +419,7 @@
 				7726B1141AFC253A0024A10E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7726B1151AFC253A0024A10E /* Build configuration list for PBXNativeTarget "NerdfeedTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +428,7 @@
 				7726B1171AFC253A0024A10E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
