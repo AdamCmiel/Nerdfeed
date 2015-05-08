@@ -37,6 +37,9 @@ class ZENCoursesViewController: UITableViewController {
         
         var dataTask = session.dataTaskWithRequest(req) { (data, response, error) in
             var json = NSString(data: data, encoding: NSUTF8StringEncoding)!
+            let data = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
+            println(data)
+            
             println(json)
         }
         
