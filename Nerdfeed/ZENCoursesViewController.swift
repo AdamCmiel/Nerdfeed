@@ -8,7 +8,12 @@
 
 import UIKit
 
+let cellReuseIdentifier = "UITableViewCell"
+
 class ZENCoursesViewController: UITableViewController {
+    
+    var courses: Courses?
+    var webViewController : ZENWebViewController?
     
     override init(style: UITableViewStyle) {
         super.init(style: style)
@@ -30,17 +35,22 @@ class ZENCoursesViewController: UITableViewController {
     }
     
     func fetchFeed() {
-        var requestString = "http://bookapi.bignerdranch.com/courses.json"
-        var url = NSURL(string: requestString)!
-        var req = NSURLRequest(URL: url)
-        var session = NSURLSession.sharedSession()
+        let requestString = "http://bookapi.bignerdranch.com/courses.json"
+        let url = NSURL(string: requestString)!
+        let req = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
         
-        var dataTask = session.dataTaskWithRequest(req) { (data, response, error) in
-            var json = NSString(data: data, encoding: NSUTF8StringEncoding)!
-            let data = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
-            println(data)
+        let dataTask = session.dataTaskWithRequest(req) { (data, response, error) in
+            let json = NSString(data: data, encoding: NSUTF8StringEncoding)!
+            let deserializedData: AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
             
-            println(json)
+            self.courses = Courses(data: deserializedData!["courses"] as! Array<AnyObject>)
+            println(self.courses!)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                println("reloading the table \(self.courses!.count)")
+                self.tableView.reloadData()
+            }
         }
         
         dataTask.resume()
@@ -48,12 +58,7 @@ class ZENCoursesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier:cellReuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,22 +71,42 @@ class ZENCoursesViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        
+        println("calling \(__FUNCTION__)")
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        let numberOfRows = self.courses?.count
+        
+        println("rendering \(numberOfRows) courese")
+        
+        if (numberOfRows == nil) {
+            return 0
+        }
+        else {
+            return numberOfRows!
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     //   let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-     //   // Configure the cell...
-
-     //   return cell
-        return UITableViewCell()
+        
+        println("generating cell for row \(indexPath.row)")
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        
+        var course = self.courses![indexPath.row]
+        cell.textLabel!.text = course.title
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let course: CourseDescription = self.courses![indexPath.row]
+        
+        self.webViewController?.title = course.title
+        self.webViewController?.URL = NSURL(string: course.url)
+        
+        self.navigationController?.pushViewController(self.webViewController!, animated: true)
     }
 
     /*

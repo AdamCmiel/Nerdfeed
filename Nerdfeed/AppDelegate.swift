@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // create instance of courses vc
         var zvc = ZENCoursesViewController()
+        zvc.webViewController = ZENWebViewController()
         
         // create a navigation controller to root the screen and add the zvc to the nc
         var nc = UINavigationController(rootViewController: zvc)
-        var window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.rootViewController = nc
         
+        self.window!.rootViewController = nc
         // boilerplate
         return true
     }
