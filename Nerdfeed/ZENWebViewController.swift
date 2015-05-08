@@ -8,43 +8,71 @@
 
 import UIKit
 
-class ZENWebViewController: UIViewController {
+class ZENWebViewController: UIViewController, UIWebViewDelegate {
     
     var URL : NSURL? {
         didSet {
             if (self.URL != nil) {
                 var req = NSURLRequest(URL: self.URL!)
-                (self.view as! UIWebView!).loadRequest(req)
+                self.webView?.loadRequest(req)
             }
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    var wvTitle: String?
+    var URLToSet: NSURL?
+    
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var forwardButton: UIBarButtonItem!
+    
+    init() {
+        super.init(nibName: "ZENWebViewController", bundle: nil)
     }
 
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        super.loadView()
+    }
+    
+    override func viewDidLoad() {
+        
+        println("view did load \(self.view) \(self.webView)")
+        self.webView?.delegate = self
+        
+        self.URL = self.URLToSet!
+        self.title = self.wvTitle!
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func loadView() {
-        var wv = UIWebView()
-        wv.scalesPageToFit = true
-        self.view = wv
+    @IBAction func goBack(sender: AnyObject) {
+        self.webView.goBack()
     }
     
-
+    @IBAction func goForward(sender: AnyObject) {
+        self.webView.goForward()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        forwardButton.enabled = self.webView.canGoForward
+        backButton.enabled = self.webView.canGoBack
+    }
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

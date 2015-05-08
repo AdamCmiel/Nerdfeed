@@ -89,8 +89,8 @@ class ZENCoursesViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let course: CourseDescription = self.courses![indexPath.row]
         
-        self.webViewController?.title = course.title
-        self.webViewController?.URL = NSURL(string: course.url)
+        self.webViewController!.wvTitle = course.title
+        self.webViewController!.URLToSet = NSURL(string: course.url)
         
         self.navigationController?.pushViewController(self.webViewController!, animated: true)
     }
